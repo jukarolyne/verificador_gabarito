@@ -8,10 +8,15 @@ def capturar_gabarito(n_questoes, guarda_letra: str ='', letras: list =['A', 'B'
   for i in range(n_questoes):
       cont = 0
       questao = input(f'Digite a {i+1}ª questão: ').split(" ")
-      for j in range(len(questao)):
+      if len(questao) < len(letras):
+        lista.append('*')
+        continue
+      else:
+        for j in range(len(questao)):
           if int(questao[j]) <= 127:
-              guarda_letra = letras[j]
-              cont +=1
+            guarda_letra = letras[j]
+            cont +=1
+            
       if cont == 1:
           lista.append(guarda_letra)
       else:
@@ -39,7 +44,7 @@ if __name__ == '__main__':
   resultados_salvos = []
   for gabarito in range(qtde_avaliados): 
     nome_avaliado = input('Digite nome do avaliado: ')
-    if letras == [None]:
+    if len(letras) <= 1:
       marcadas = capturar_gabarito(len(gabarito_base))
     else:
       marcadas = capturar_gabarito(len(gabarito_base), letras)
